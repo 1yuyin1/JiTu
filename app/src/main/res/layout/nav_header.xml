@@ -14,18 +14,19 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="11111"
+        android:layout_above="@id/signature"
+        android:text="用户名"
         android:textColor="#FFF"
         android:textSize="14sp"/>
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/signature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/username"
-        android:text="222"
+        android:layout_alignParentBottom="true"
+        android:text="个性签名："
         android:textColor="#FFF"
         android:textSize="14sp"/>
+
 
 
 </RelativeLayout>

@@ -14,12 +14,12 @@
             android:icon="@drawable/c"
             android:title="3"/>
         <item
-            android:id="@+id/nav_mail"
+            android:id="@+id/nav_change"
             android:icon="@drawable/d"
-            android:title="4"/>
+            android:title="修改密码"/>
         <item
-            android:id="@+id/nav_task"
+            android:id="@+id/nav_logout"
             android:icon="@drawable/e"
-            android:title="5"/>
+            android:title="退出账户"/>
     </group>
 </menu>

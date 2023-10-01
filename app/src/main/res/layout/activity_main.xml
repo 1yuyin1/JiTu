@@ -26,6 +26,14 @@
                 app:iconifiedByDefault="false"
                 app:queryHint="Search" />
         </androidx.appcompat.widget.Toolbar>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            android:elevation="8dp"
+            android:src="@drawable/a"/>
     </FrameLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
