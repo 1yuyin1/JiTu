@@ -16,25 +16,35 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:submitBackground="@color/black"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_gravity="top">
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp"
                 android:maxWidth="500dp"
                 app:iconifiedByDefault="false"
                 app:queryHint="Search" />
         </androidx.appcompat.widget.Toolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:layout_gravity="bottom" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="20dp"
+            android:contentDescription="上传"
             android:elevation="8dp"
-            android:src="@drawable/a"/>
+            android:src="@drawable/a" />
     </FrameLayout>
+
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"

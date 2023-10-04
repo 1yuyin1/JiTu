@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlterActivity">
+
+    <!-- 头像 -->
+    <ImageView
+        android:id="@+id/avatar_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/a"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp" />
+
+    <!-- 修改头像按钮 -->
+    <Button
+        android:id="@+id/change_avatar_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上传新头像"
+        android:layout_below="@id/avatar_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+    <!-- 输入新用户名 -->
+    <EditText
+        android:id="@+id/new_uname_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/change_avatar_button"
+        android:hint="请输入新用户名"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="48dp" />
+    <!-- 输入新个性签名 -->
+    <EditText
+        android:id="@+id/new_signature_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_uname_edit"
+        android:hint="请输入新个性签名"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="48dp" />
+    <!-- 输入旧密码 -->
+    <EditText
+        android:id="@+id/old_password_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_signature_edit"
+        android:hint="请输入旧密码"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="48dp" />
+
+    <!-- 再次输入旧密码 -->
+    <EditText
+        android:id="@+id/confirm_old_password_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/old_password_edit"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="请再次输入旧密码"
+        android:minHeight="48dp" />
+
+    <!-- 输入新密码 -->
+    <EditText
+        android:id="@+id/new_password_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirm_old_password_edit"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="请输入新密码"
+        android:minHeight="48dp" />
+
+    <!-- 提交按钮 -->
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:layout_below="@id/new_password_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+
+    <!-- 相关信息提示 -->
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submit_button"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="注意：两次输入旧密码需相同，新密码不得少于6位"
+        android:textColor="#FF0000"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
+

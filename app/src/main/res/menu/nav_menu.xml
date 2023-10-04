@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_cal"
+            android:id="@+id/nav_usna"
             android:icon="@drawable/a"
-            android:title="1"/>
+            android:title="修改用户名"/>
         <item
-            android:id="@+id/nav_friends"
+            android:id="@+id/nav_signature"
             android:icon="@drawable/b"
-            android:title="2"/>
+            android:title="修改个性签名"/>
         <item
-            android:id="@+id/nav_location"
-            android:icon="@drawable/c"
-            android:title="3"/>
-        <item
-            android:id="@+id/nav_change"
+            android:id="@+id/nav_alter"
             android:icon="@drawable/d"
             android:title="修改密码"/>
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/e"
             android:title="退出账户"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/c"
+            android:title="关于"/>
     </group>
 </menu>
