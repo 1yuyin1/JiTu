@@ -3,23 +3,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_usna"
-            android:icon="@drawable/a"
+            android:icon="@drawable/zero"
             android:title="修改用户名"/>
         <item
             android:id="@+id/nav_signature"
-            android:icon="@drawable/b"
+            android:icon="@drawable/one"
             android:title="修改个性签名"/>
         <item
             android:id="@+id/nav_alter"
-            android:icon="@drawable/d"
+            android:icon="@drawable/two"
             android:title="修改密码"/>
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/e"
+            android:icon="@drawable/three"
             android:title="退出账户"/>
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/c"
+            android:icon="@drawable/four"
             android:title="关于"/>
     </group>
 </menu>

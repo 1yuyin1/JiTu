@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Picture_ShowActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:submitBackground="@color/black" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/downLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:contentDescription="下载"
+        android:elevation="8dp"
+        android:src="@drawable/a" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/show_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/ImageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@id/ImageNameView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/ImageNameView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="图片名称"
+            android:gravity="center"
+            android:textColor="@color/purple"
+            app:layout_constraintTop_toBottomOf="@id/ImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/UsNameView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="上传者名称"
+            android:gravity="center"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/ImageNameView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/PraiseView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="点赞数"
+            android:gravity="center"
+            android:textColor="#0000FF"
+            app:layout_constraintTop_toBottomOf="@id/UsNameView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/CommentView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="评论"
+            android:gravity="center"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/PraiseView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/WriteCommentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/CommentView"
+            android:hint="请输入评论"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:minHeight="48dp"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/SubmitButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="提交"
+            app:layout_constraintTop_toBottomOf="@id/WriteCommentView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -1,22 +1,43 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.NetworkOnMainThreadException;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
+    private final Gson gson = new Gson();
     private Button ReButton;
     private EditText username;
     private EditText password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
         ReButton = (Button) findViewById(R.id.btn_register);
         username = (EditText) findViewById(R.id.et_username);
         password = (EditText) findViewById(R.id.et_password);
-        Bmob.initialize(this,"f8a586e2cddf826ad840f9f072728ef6");
-
 
         ReButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,26 +56,75 @@ public class RegisterActivity extends AppCompatActivity {
                 }else if(username2.length() < 4 ||password2.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "用户名不得少于4位，密码不得少于6位", Toast.LENGTH_LONG).show();
                 } else {
-                //将账号信息加入到数据库
-                User user = new User();
-                user.setUsername(username2);
-                user.setPassword(password2);
-                user.signUp(new SaveListener<Object>() {
-                    @Override
-                    public void done(Object o, BmobException e) {
-                        if (e == null) {
-                            Toast.makeText(RegisterActivity.this,"注册成功", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            intent.putExtra("user",user);
-                            startActivity(intent);
-                            finishAffinity(); // 清除当前活动栈，避免返回到登录界面
-                        } else {
-                            Toast.makeText(RegisterActivity.this,"注册失败"+e,Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                    register(username2,password2);
                 }
             }
         });
     }
+
+    private void register(String username,String password ){
+        new Thread(() -> {
+            // url路径
+            String url = "http://47.107.52.7:88/member/photo/user/register";
+            // 请求头
+            Headers headers = new Headers.Builder()
+                    .add("Accept", "application/json, text/plain, */*")
+                    .add("appId", "9434b7cbae6644f4bb2965c9fa46a20a")
+                    .add("appSecret", "07005e8f8e038ed074a21a1d44eb2e6d9cc71")
+                    .add("Content-Type", "application/json")
+                    .build();
+            // 请求体
+            // PS.用户也可以选择自定义一个实体类，然后使用类似fastjson的工具获取json串
+            Map<String, Object> bodyMap = new HashMap<>();
+            bodyMap.put("password", password);
+            bodyMap.put("username", username);
+
+            // 将Map转换为字符串类型加入请求体中
+            String body = gson.toJson(bodyMap);
+            MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
+
+            //请求组合创建
+            Request request = new Request.Builder()
+                    .url(url)
+                    // 将请求头加至请求中
+                    .headers(headers)
+                    .post(RequestBody.create(MEDIA_TYPE_JSON, body))
+                    .build();
+            try {
+                OkHttpClient client = new OkHttpClient();
+                //发起请求，传入callback进行回调
+                client.newCall(request).enqueue(callback);
+            }catch (NetworkOnMainThreadException ex){
+                ex.printStackTrace();
+            }
+        }).start();
+    }
+
+
+    /**
+     * 回调
+     */
+    private final Callback callback = new Callback() {
+        @Override
+        public void onFailure(@NonNull Call call, IOException e) {
+            //TODO 请求失败处理
+            e.printStackTrace();
+        }
+        @Override
+        public void onResponse(@NonNull Call call, Response response) throws IOException {
+            //TODO 请求成功处理
+            Type jsonType = new TypeToken<ResponseBody<Object>>(){}.getType();
+            // 获取响应体的json串
+            String body = response.body().string();
+            Log.d("info", body);
+            // 解析json串到自己封装的状态
+            ResponseBody<Object> dataResponseBody = gson.fromJson(body,jsonType);
+            Log.d("info", dataResponseBody.toString());
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            intent.putExtra("user",dataResponseBody.toString());
+            startActivity(intent);
+            finishAffinity(); // 清除当前活动栈，避免返回到登录界面
+        }
+    };
+
 }

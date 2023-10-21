@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHolder> {
+    private User muser;
     private Context mContext;
     private List<Picture> mPictureList;
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -40,8 +43,9 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
 
         }
     }
-    public PictureAdapter(List<Picture> pictureList){
+    public PictureAdapter(List<Picture> pictureList,User user){
         mPictureList = pictureList;
+        muser = user;
     }
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewTtpe){
         if ((mContext == null)) {
@@ -54,23 +58,30 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
         Picture picture = mPictureList.get(position);
 
         //设置textview内容
-        holder.image_nameView.setText(picture.image_name);
+        holder.image_nameView.setText(picture.imageName);
         holder.usnView.setText(picture.usn);
         holder.praiseView.setText(String.valueOf(picture.praise));
         String comment ="";
-        for (int i = 0; i < picture.commentList.size(); i++) {
-            comment += picture.commentList.get(i).commenter;
+        //当评论List不为空时，只添加上一个评论内容，以防过多
+        if(!picture.commentList.isEmpty()) {
+            comment += picture.commentList.get(0).commenter;
             comment += ":";
-            comment += picture.commentList.get(i).content;
+            comment += picture.commentList.get(0).content;
             comment += "。";
-
         }
         holder.comView.setText(comment);
-        //这是通过file加载，也可以通过url加载（需要上传至服务器）
-//        Bitmap bitmap = BitmapFactory.decodeFile(picture.image.getLocalFile().getAbsolutePath());
-//        Glide.with(mContext).load(bitmap);
 
-        Glide.with(mContext).load(picture.image.getFileUrl()).into(holder.pictureView);
+        //通过url加载图片
+        Glide.with(mContext).load(picture.url).into(holder.pictureView);
+        holder.pictureView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext,Picture_ShowActivity.class);
+                intent.putExtra("picture",picture);
+                intent.putExtra("user",muser);
+                mContext.startActivity(intent);
+            }
+        });
     }
     public int getItemCount(){
         return mPictureList.size();
